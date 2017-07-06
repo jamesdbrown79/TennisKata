@@ -8,18 +8,19 @@ namespace TennisKata
 {
     public class Game
     {
-        private int player1points;
-        private int player2points;
+        private int player1Points;
+        private int player2Points;
+        private const int threePoints = 3;
 
         public void Player1WinsPoint()
         {
             if (IsPlayer2Advantage())
             {
-                player2points--;
+                player2Points--;
             }
             else
             {
-                player1points++;
+                player1Points++;
             }
         }
 
@@ -27,22 +28,22 @@ namespace TennisKata
         {
             if (IsPlayer1Advantage())
             {
-                player1points--;
+                player1Points--;
             }
             else
             {
-                player2points++;
+                player2Points++;
             }
         }
 
         public bool Player1Wins()
         {
-            return (player1points >= 4) && (player1points - player2points >= 2);
+            return (player1Points >= 4) && (player1Points - player2Points >= 2);
         }
 
         public bool Player2Wins()
         {
-            return (player2points >= 4) && (player2points - player1points >= 2);
+            return (player2Points >= 4) && (player2Points - player1Points >= 2);
         }
 
         public string Score()
@@ -53,11 +54,11 @@ namespace TennisKata
             }
             else if (IsAdvantage())
             {
-                return ("advantage");
+                return "advantage";
             }
             else
             {
-                return TennisFormatScore(player1points) + "-" + TennisFormatScore(player2points);
+                return string.Format("{0}-{1}", TennisFormatScore(player1Points), TennisFormatScore(player2Points));
             }
         }
 
@@ -68,17 +69,17 @@ namespace TennisKata
 
         private bool IsPlayer1Advantage()
         {
-            return player1points == 4 && player2points == 3;
+            return player1Points > threePoints && player2Points == threePoints;
         }
 
         private bool IsPlayer2Advantage()
         {
-            return player2points == 4 && player1points == 3;
+            return player2Points > threePoints && player1Points == threePoints;
         }
 
         private bool IsDeuce()
         {
-            return player1points == 3 && player2points == 3;
+            return player1Points == threePoints && player2Points == threePoints;
         }
 
         private string TennisFormatScore(int points)
