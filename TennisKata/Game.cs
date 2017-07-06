@@ -63,7 +63,7 @@ namespace TennisKata
 
         private bool IsAdvantage()
         {
-            return (player1points == 4 && player2points == 3) || (player1points == 3 && player2points == 4);
+            return IsPlayer1Advantage() || IsPlayer2Advantage();
         }
 
         private bool IsPlayer1Advantage()
