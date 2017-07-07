@@ -10,7 +10,9 @@ namespace TennisKata
     {
         private int player1Points;
         private int player2Points;
-        private const int threePoints = 3;
+        private const int twoPointsClear = 2;
+        private const int threePointsDeuce = 3;
+        private const int fourPointsWinsGame = 4;
 
         public void Player1WinsPoint()
         {
@@ -38,12 +40,12 @@ namespace TennisKata
 
         public bool Player1Wins()
         {
-            return (player1Points >= 4) && (player1Points - player2Points >= 2);
+            return (player1Points >= fourPointsWinsGame) && (player1Points - player2Points >= twoPointsClear);
         }
 
         public bool Player2Wins()
         {
-            return (player2Points >= 4) && (player2Points - player1Points >= 2);
+            return (player2Points >= fourPointsWinsGame) && (player2Points - player1Points >= twoPointsClear);
         }
 
         public string Score()
@@ -52,9 +54,13 @@ namespace TennisKata
             {
                 return "deuce";
             }
-            else if (IsAdvantage())
+            else if (IsPlayer1Advantage())
             {
-                return "advantage";
+                return "advantage player 1";
+            }
+            else if (IsPlayer2Advantage())
+            {
+                return "advantage player 2";
             }
             else
             {
@@ -62,24 +68,19 @@ namespace TennisKata
             }
         }
 
-        private bool IsAdvantage()
-        {
-            return IsPlayer1Advantage() || IsPlayer2Advantage();
-        }
-
         private bool IsPlayer1Advantage()
         {
-            return player1Points > threePoints && player2Points == threePoints;
+            return player1Points > threePointsDeuce && player2Points == threePointsDeuce;
         }
 
         private bool IsPlayer2Advantage()
         {
-            return player2Points > threePoints && player1Points == threePoints;
+            return player2Points > threePointsDeuce && player1Points == threePointsDeuce;
         }
 
         private bool IsDeuce()
         {
-            return player1Points == threePoints && player2Points == threePoints;
+            return player1Points == threePointsDeuce && player2Points == threePointsDeuce;
         }
 
         private string TennisFormatScore(int points)

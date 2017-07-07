@@ -101,7 +101,21 @@ namespace TennisKata.Tests
         }
 
         [TestMethod()]
-        public void should_return_advantage_when_score_is_4_3()
+        public void should_return_player1_advantage_when_score_is_4_3()
+        {
+            //setup
+
+            //act
+            Player1WinsConsecutivePoints(3);
+            Player2WinsConsecutivePoints(3);
+            game.Player1WinsPoint();
+
+            //assert
+            Assert.AreEqual("advantage player 1", game.Score());
+        }
+
+        [TestMethod()]
+        public void should_return_player2_advantage_when_score_is_3_4()
         {
             //setup
 
@@ -109,9 +123,11 @@ namespace TennisKata.Tests
             Player1WinsConsecutivePoints(3);
             Player2WinsConsecutivePoints(3);
             game.Player2WinsPoint();
+            game.Player1WinsPoint();
+            game.Player2WinsPoint();
 
             //assert
-            Assert.AreEqual("advantage", game.Score());
+            Assert.AreEqual("advantage player 2", game.Score());
         }
 
         [TestMethod()]
